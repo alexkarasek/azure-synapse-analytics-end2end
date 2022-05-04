@@ -179,7 +179,7 @@ IF ((SELECT COUNT(*) FROM sys.external_data_sources WHERE name = 'PokerPRQData')
 
 
 DECLARE @datasrcsql AS NVARCHAR(300),
-        @LakeAccount as NVARCHAR(200) = 'azrawdatalake4djynq', --Add name of local ADLS Gen2 storage account
+        @LakeAccount as NVARCHAR(200) = '[insert storage accountname here]', --Add name of local ADLS Gen2 storage account
         @RawFilePath AS NVARCHAR(200) = 'raw/Poker Data/PokerGameDetails' --Add local filepath for raw data lake zone storage
 
 SET @datasrcsql = N'CREATE EXTERNAL DATA SOURCE PokerPRQData

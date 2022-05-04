@@ -15,7 +15,7 @@ CREATE SCHEMA ext;
 GO
 
 --Provide the data lake account and full file path of the enriched Delta game details
-DECLARE @LakeAccount AS NVARCHAR(1000) = N'azcurateddatalake4djynq'
+DECLARE @LakeAccount AS NVARCHAR(1000) = N'[insert storage account here]'
 DECLARE @RawFilePath AS NVARCHAR(1000) = N'curated/Poker Data/PokerGameDetails'
 DECLARE @Location    AS NVARCHAR(1000) = N''
 DECLARE @SQLDataSrc  AS NVARCHAR(1000) = N''
@@ -140,7 +140,7 @@ GO
 */
 
 --Provide the data lake account and full file path where the pre-calculated dataset will reside in the data lake
-DECLARE @lakeaccount AS NVARCHAR(100) = N'azcurateddatalake4djynq'
+DECLARE @lakeaccount AS NVARCHAR(100) = N'[insert storage account here]'
 DECLARE @filepath    AS NVARCHAR(100) = N'curated/Poker Data/PlayerGameSummary' 
 
 DECLARE @location    AS NVARCHAR(100) = N''
