@@ -31,7 +31,7 @@ As hands are played on online poker servers, logs are generated to capture all o
 ### In order to build this solution, we will implement architecture below:<p>
  
  <p align="left">
-  <img src="./images/PokerArchitecture1.png">
+  <img src="./images/PokerArchitecture2.png">
             </p>
  
  ### Once the data is loaded and transformed, it can easily be served up for interactive analysis
