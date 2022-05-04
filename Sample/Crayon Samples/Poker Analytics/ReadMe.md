@@ -48,3 +48,4 @@ As hands are played on online poker servers, logs are generated to capture all o
  * Import and execute <a href="./SQL Scripts/./SQL Scripts/1 - Explore public JSON data.sql">script 1</a>
  * Import and execute <a href="./Notebooks/2 - Convert Poker Game Data to Delta.ipynb">notebook 2</a> to enrich data and persist in Delta Lake
  * Import and execute <a href="./SQL Scripts/3 - Create Logical DW over Delta.sql">script 3</a> to create Logical DW over Delta Lake
+ * Open <a href="./Power BI/Poker Analytics.pbit">Power BI Template file </a> and update paramters with the name of your SQL Serverless endpoint to populate dashboard based on your new LDW
