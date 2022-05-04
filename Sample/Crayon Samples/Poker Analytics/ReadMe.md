@@ -43,7 +43,7 @@ As hands are played on online poker servers, logs are generated to capture all o
  
  In order to build this solution:
  
- * Follow ![instructions to deploy synapse workspace](../../../ReadMe.md), storage account, and spark cluster
+ * Follow ![instructions to deploy synapse workspace](/README.md), storage account, and spark cluster
  * Import and execute script 0 to prep SQL Serverless database
  * Import and execute script 1 to query JSON data and create SQL Views
  * Import and execute notebook 2 to enrich data and persist in Delta Lake
