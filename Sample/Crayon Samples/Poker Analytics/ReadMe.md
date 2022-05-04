@@ -44,7 +44,7 @@ As hands are played on online poker servers, logs are generated to capture all o
  In order to build this solution:
  
  * Follow [instructions to deploy synapse workspace](/README.md), storage account, and spark cluster
- * Import and execute [script 0](../SQL Scripts/0 - Setup Pokerdata Database.sql) to prep SQL Serverless database
- * Import and execute [script 1](../SQL Scripts/1 - Explore public JSON data.sql) to query JSON data and create SQL Views
- * Import and execute [notebook 2](../Notebooks/2 - Convert Poker Game Data to Delta.ipynb) to enrich data and persist in Delta Lake
- * Import and execute [script 3](../SQL Scripts/3 - Create Logical DW over Delta.sql) to create Logical DW over Delta Lake
+ * Import and execute <a href="./SQL Scripts/0 - Setup Pokerdata Database.sql">script 0</a> to prep SQL Serverless database
+ * Import and execute <a href="./SQL Scripts/./SQL Scripts/1 - Explore public JSON data.sql">script 1</a>
+ * Import and execute <a href="./Notebooks/2 - Convert Poker Game Data to Delta.ipynb">notebook 2</a> to enrich data and persist in Delta Lake
+ * Import and execute <a href="./SQL Scripts/3 - Create Logical DW over Delta.sql">script 3</a> to create Logical DW over Delta Lake
