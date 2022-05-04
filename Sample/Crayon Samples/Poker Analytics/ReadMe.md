@@ -35,6 +35,7 @@ As hands are played on online poker servers, logs are generated to capture all o
             </p>
  
  ### Once the data is loaded and transformed, it can easily be served up for interactive analysis
+ #### (Click on image to try it out!!)
  
 <p align="center">
  <a href="https://app.powerbi.com/view?r=eyJrIjoiOTA3YmYwOTYtMDJiNS00MWM5LWEyZTktMGUzNDMyNzEyNzI4IiwidCI6IjY2ODk4MDgyLTM5NzktNGY3Mi1iYjY3LTU4YzNiODY0Zjk0YyJ9&pageName=ReportSectiona691326031230d3a0b69"> <img src="./images/PokerDemo.png"></img></a>
