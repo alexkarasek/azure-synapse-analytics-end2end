@@ -14,15 +14,24 @@ Topics included in this accelerator include:
   * Data visualization and analytical reporting using Power BI
  
  ### Background:
- In poker, certain characteristics can be used to identify a player's style of play, and based on that style, specific strategies can be employed to maximize profits. As an example, below are 4 basic categories of players, along with an explanation of each, and observations about the optimal strategy to emply vs each.
+ In poker, certain characteristics can be used to identify a player's style of play, and based on that style, specific strategies can be employed to maximize profits. As an example, below are 4 basic categories of players, along with an explanation of each, and observations about the optimal strategy to employ vs each.
  
- [Insert player quadrant slide]
+<p align="center">
+ <img src="./images/PokerMatrix.png">
+ </p>
  
 As hands are played on online poker servers, logs are generated to capture all of the actions taking place. Examples of these types of logs have been generated and persisted as JSON for this solution. In order to derive insights, this accelerator can be used to parse the JSON data and persist it in a data lake where it can be transformed and enriched before ultimately being surfaced in Power BI.
  
- [Insert source data image]
+### Example of source data:<p>
  
- [Insert reference architecture image]
+ <p align="left">
+  <img src="./images/PokerData.png">
+  </p>
+ 
+### In order to build this solution, we will implement architecture below:<p>
+ 
+ <p align="left">
+  <img src="./images/
  
  See below for a demo of the dashboard that can be built using the code provided.
  
