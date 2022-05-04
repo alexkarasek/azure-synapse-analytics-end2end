@@ -22,7 +22,7 @@ Topics included in this accelerator include:
  
  See below for a demo of the dashboard that can be built using the code provided.
  
-<iframe src="https://app.powerbi.com/view?r=eyJrIjoiOTA3YmYwOTYtMDJiNS00MWM5LWEyZTktMGUzNDMyNzEyNzI4IiwidCI6IjY2ODk4MDgyLTM5NzktNGY3Mi1iYjY3LTU4YzNiODY0Zjk0YyJ9&pageName=ReportSectiona691326031230d3a0b69" frameborder="0" allowfullscreen="true"> </iframe>
+[Insert screenshot of demo with link to live page]
  
  In order to build this solution:
  
