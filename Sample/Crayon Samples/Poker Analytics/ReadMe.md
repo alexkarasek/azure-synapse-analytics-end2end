@@ -31,12 +31,14 @@ As hands are played on online poker servers, logs are generated to capture all o
 ### In order to build this solution, we will implement architecture below:<p>
  
  <p align="left">
-  <img src="./images/PokerArchitecture1.png>
+  <img src="./images/PokerArchitecture1.png">
             </p>
  
- See below for a demo of the dashboard that can be built using the code provided.
+ ### Once the data is loaded and transformed, it can easily be served up for interactive analysis
  
-[Insert screenshot of demo with link to live page]
+<p align="center">
+ <img src="./images/Poker">
+ </p>
  
  In order to build this solution:
  
