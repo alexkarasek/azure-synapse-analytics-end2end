@@ -14,7 +14,7 @@ Topics included in this accelerator include:
  
  [Insert player quadrant slide]
  
- In order to derive these insights, this accelerator can be used to transform JSON data and persist it in a data lake where it can be transformed and enriched before ultimately being surfaced in Power BI.
+As hands are played on online poker servers, logs are generated to capture all of the actions taking place. Examples of these types of logs have been generated and persisted as JSON for this solution. In order to derive insights, this accelerator can be used to parse the JSON data and persist it in a data lake where it can be transformed and enriched before ultimately being surfaced in Power BI.
  
  [Insert source data image]
  
