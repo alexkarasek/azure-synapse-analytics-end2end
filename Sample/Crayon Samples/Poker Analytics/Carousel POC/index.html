@@ -1,47 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="styles.css" />
-    <script src="script.js" defer></script>
-    <title>Document</title>
-  </head>
-  <body>
-    <section aria-label="Newest Photos">
-      <div class="carousel" data-carousel>
-        <button class="carousel-button prev" data-carousel-button="prev">
-          &#8656;
-        </button>
-        <button class="carousel-button next" data-carousel-button="next">
-          &#8658;
-        </button>
 
-        <ul data-slides>
-          <li class="slide" data-active>
-            <img src="..\images\Poker1.jpg" alt="Poker1" />
-          </li>
-          <li class="slide">
-            <img src="..\images\PokerArchitecture1.png" alt="Poker2" />
-          </li>
-	  <li class="slide">
-            <img src="..\images\PokerArchitecture2.png" alt="Poker3" />		
-          </li>
-	  <li class="slide">
-            <img src="..\images\PokerData.png" alt="Poker4" />
-          </li>
-<li class="slide">
-            <img src="..\images\PokerDemo.png" alt="Poker5" />
-<li class="slide">
-            <img src="..\images\PokerMatrix.png" alt="Poker6" />
-<li class="slide">
-            <img src="..\images\PokerTitle.png" alt="Poker7" />
-          </li>
-          </li>
-          </li>
-        </ul>
-      </div>
-    </section>
+<html>
+  <style>
+div {
+    width: 75%;
+    height: 0;
+    padding-bottom: 56%; /* Change this till it fits the dimensions of your video */
+    position: relative;
+    justify-content: center;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 10%;
+}
+
+div iframe {
+    width: 100%;
+    height: 75%;
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    margin-left: auto;
+    margin-right: auto;
+}
+  </style>
+  <body>
+    <div >
+      <iframe src="./iframe.html" name="frame2" id="frame2" frameborder="0" marginwidth="0" marginheight="0" scrolling="auto" onload="" allowtransparency="false"></iframe>
+  </div>
+      
+    </p>
+    </div>
+  <div id="block"></div>
+  <div id="header"></div>
+  <div id="footer"></div>
+
   </body>
 </html>
