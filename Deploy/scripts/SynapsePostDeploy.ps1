@@ -145,7 +145,15 @@ function Save-SynapseSampleArtifacts{
   } 
   else {
       Install-Module Az.Synapse -Force
+      Import-Module Az.Synapse
   }
+
+  #Add System.Web type to encode/decode URL
+  Add-Type -AssemblyName System.Web
+
+  #Authenticate for REST API calls
+  $token = (Get-AzAccessToken -Resource "https://dev.azuresynapse.net").Token
+  $headers = @{ Authorization = "Bearer $token" }
 
   $synapseTokens = @{"`#`#azsynapsewks`#`#" = $SynapseWorkspaceName; }
   $indexFileUrl = "https://raw.githubusercontent.com/Azure/azure-synapse-analytics-end2end/main/Sample/index.json"
@@ -171,10 +179,23 @@ function Save-SynapseSampleArtifacts{
             }
         }
 
-        $definitionFilePath = [guid]::NewGuid()
-        Set-Content -Path $definitionFilePath $fileContent
-        Set-AzSynapseSqlScript -WorkspaceName $SynapseWorkspaceName -Name $sqlScript.name -DefinitionFile $definitionFilePath -FolderPath $sqlScript.workspaceFolderPath
-        Remove-Item -Path $definitionFilePath
+        if ($sqlScript.interface.ToLower() -eq "powershell") {
+          Write-Host "Creating SQL Script: $($sqlScript.name) via PowerShell"
+          $definitionFilePath = [guid]::NewGuid()
+          Set-Content -Path $definitionFilePath $fileContent
+          Set-AzSynapseSqlScript -WorkspaceName $SynapseWorkspaceName -Name $sqlScript.name -DefinitionFile $definitionFilePath -FolderPath $sqlScript.workspaceFolderPath
+          Remove-Item -Path $definitionFilePath    
+        }
+        elseif ($sqlScript.interface.ToLower() -eq "rest")
+        {
+            Write-Host "Creating SQL Script: $($sqlScript.name) via REST API"
+            $subresource = "sqlScripts"
+            $uri = "https://$SynapseWorkspaceName.dev.azuresynapse.net/$subresource/$($sqlScript.name)?api-version=2020-02-01"
+    
+            #Assign Synapse Workspace Administrator Role to UAMI
+            $body = $fileContent
+            Invoke-RestMethod -Method Put -ContentType "application/json" -Uri $uri -Headers $headers -Body $body
+        }
       }
 
       #Create Linked Service artifacts.
@@ -272,10 +293,15 @@ function Save-SynapseSampleArtifacts{
           }
         }
 
-        $definitionFilePath = [guid]::NewGuid()
-        Set-Content -Path $definitionFilePath $fileContent
-        Set-AzSynapseNotebook -WorkspaceName $SynapseWorkspaceName -Name $notebook.name -DefinitionFile $definitionFilePath -FolderPath $notebook.workspaceFolderPath
-        Remove-Item -Path $definitionFilePath
+        if ($notebook.interface.ToLower() -eq "powershell") {
+          $definitionFilePath = [guid]::NewGuid()
+          Set-Content -Path $definitionFilePath $fileContent
+          Set-AzSynapseNotebook -WorkspaceName $SynapseWorkspaceName -Name $notebook.name -DefinitionFile $definitionFilePath -FolderPath $notebook.workspaceFolderPath
+          Remove-Item -Path $definitionFilePath
+        }
+        elseif ($notebook.interface.ToLower() -eq "rest") {
+          ## Action to perform if the condition is true #>
+        }
       }
       break
     }

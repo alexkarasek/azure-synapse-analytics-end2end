@@ -130,10 +130,10 @@ param synapseSparkPoolName string = 'SparkPool'
 param synapseSparkPoolNodeSize string = 'Small'
 
 @description('Spark Min Node Count')
-param synapseSparkPoolMinNodeCount int = 2
+param synapseSparkPoolMinNodeCount int = 3
 
 @description('Spark Max Node Count')
-param synapseSparkPoolMaxNodeCount int = 2
+param synapseSparkPoolMaxNodeCount int = 3
 
 @description('Deploy ADX Pool')
 param ctrlDeploySynapseADXPool bool = false //Controls the creation of Synapse Spark Pool
@@ -290,6 +290,7 @@ module m_SynapseDeploy 'modules/SynapseDeploy.bicep' = {
     networkIsolationMode: networkIsolationMode
     resourceLocation: resourceLocation
     ctrlDeploySynapseSQLPool: ctrlDeploySynapseSQLPool
+    ctrlDeployPurview: ctrlDeployPurview
     ctrlDeploySynapseSparkPool: ctrlDeploySynapseSparkPool
     ctrlDeploySynapseADXPool: ctrlDeploySynapseADXPool
     workspaceDataLakeAccountName: workspaceDataLakeAccountName
@@ -593,8 +594,58 @@ var azAnomalyDetectorParams = ctrlDeployAI ? '-AnomalyDetectorAccountID ${m_AISe
 var datalakeAccountSynapseParams = '-WorkspaceDataLakeAccountName ${workspaceDataLakeAccountName} -WorkspaceDataLakeAccountID ${m_SynapseDeploy.outputs.workspaceDataLakeAccountID} -RawDataLakeAccountName ${rawDataLakeAccountName} -RawDataLakeAccountID ${m_DataLakeDeploy.outputs.rawDataLakeStorageAccountID} -CuratedDataLakeAccountName ${curatedDataLakeAccountName} -CuratedDataLakeAccountID ${m_DataLakeDeploy.outputs.curatedDataLakeStorageAccountID}'
 var synapseWorkspaceParams = '-SynapseWorkspaceName ${synapseWorkspaceName} -SynapseWorkspaceID ${m_SynapseDeploy.outputs.synapseWorkspaceID}'
 var sampleArtifactsParams = ctrlDeploySampleArtifacts ? '-CtrlDeploySampleArtifacts $True -SampleArtifactCollectioName ${sampleArtifactCollectionName}' : ''
+var resourceNamesArray = [
+  'azvnet=${vNetName}'
+  'azsynapsewks=${synapseWorkspaceName}'
+  'azwksdatalake=${workspaceDataLakeAccountName}'
+  'azrawdatalake=${rawDataLakeAccountName}'
+  'azcurateddatalake=${curatedDataLakeAccountName}'
+  'azcosmosdbaccount=${cosmosDBAccountName}'
+  'azcosmosdbname=${cosmosDBDatabaseName}'
+  'azanomalydetector=${anomalyDetectorName}'
+  'aztextanalytics=${textAnalyticsAccountName}'
+  'azsynapsesqlpool=${synapseDedicatedSQLPoolName}'
+  'azsynapsesparkpool=${synapseSparkPoolName}'
+  'azsynapseadxpool=${synapseADXPoolName}'
+  'azsynapseadxdb=${synapseADXDatabaseName}'
+  'azsynapsehub=${synapsePrivateLinkHubName}'
+  'azpurview=${purviewAccountName}'
+  'azkeyvault=${keyVaultName}'
+  'azmlwks=${azureMLWorkspaceName}'
+  'azmlstorage=${azureMLStorageAccountName}'
+  'azmlappinsights=${azureMLAppInsightsName}'
+  'azmlcontainerreg=${azureMLContainerRegistryName}'
+  'azdatashare=${dataShareAccountName}'
+  'azeventhubns=${eventHubNamespaceName}'
+  'azeventhub=${eventHubName}'
+  'aziothub=${iotHubName}'
+  'azstreamjob=${streamAnalyticsJobName}'
+]
 
-var synapseScriptArguments = '-NetworkIsolationMode ${networkIsolationMode} -ctrlDeployAI $${ctrlDeployAI} -SubscriptionID ${subscription().subscriptionId} -ResourceGroupName ${resourceGroup().name} -ResourceGroupLocation ${resourceGroup().location} -UAMIIdentityID ${m_PlatformServicesDeploy.outputs.deploymentScriptUAMIPrincipalID} -KeyVaultName ${keyVaultName} -KeyVaultID ${m_PlatformServicesDeploy.outputs.keyVaultID} ${synapseWorkspaceParams} ${azMLSynapseLinkedServiceIdentityID} ${datalakeAccountSynapseParams} ${azMLWorkspaceName} ${azTextAnalyticsParams} ${azAnomalyDetectorParams} ${azCosmosDBParams} ${sampleArtifactsParams}'
+var resourceNamesCollectionParams = '-ResourceNamesCollectionString "${join(resourceNamesArray, '`n')}"'
+
+//var synapseScriptArguments = '-NetworkIsolationMode ${networkIsolationMode} -ctrlDeployAI $${ctrlDeployAI} -SubscriptionID ${subscription().subscriptionId} -ResourceGroupName ${resourceGroup().name} -ResourceGroupLocation ${resourceGroup().location} -UAMIIdentityID ${m_PlatformServicesDeploy.outputs.deploymentScriptUAMIPrincipalID} -KeyVaultName ${keyVaultName} -KeyVaultID ${m_PlatformServicesDeploy.outputs.keyVaultID} ${synapseWorkspaceParams} ${azMLSynapseLinkedServiceIdentityID} ${datalakeAccountSynapseParams} ${azMLWorkspaceName} ${azTextAnalyticsParams} ${azAnomalyDetectorParams} ${azCosmosDBParams} ${sampleArtifactsParams}'
+
+var synapseScriptArguments = join([
+  '-NetworkIsolationMode ${networkIsolationMode}' 
+  '-ctrlDeployAI $${ctrlDeployAI}'
+  '-SubscriptionID ${subscription().subscriptionId}'
+  '-ResourceGroupName ${resourceGroup().name}'
+  '-ResourceGroupLocation ${resourceGroup().location}'
+  '-UAMIIdentityID ${m_PlatformServicesDeploy.outputs.deploymentScriptUAMIPrincipalID}'
+  '-KeyVaultName ${keyVaultName}'
+  '-KeyVaultID ${m_PlatformServicesDeploy.outputs.keyVaultID}'
+  '${synapseWorkspaceParams}'
+  '${azMLSynapseLinkedServiceIdentityID}'
+  '${datalakeAccountSynapseParams}'
+  '${azMLWorkspaceName}'
+  '${azTextAnalyticsParams}'
+  '${azAnomalyDetectorParams}'
+  '${azCosmosDBParams}'
+  '${sampleArtifactsParams}'
+//'${resourceNamesCollectionParams}'
+], ' ')
+
 
 //Purview Deployment Script: script location encoded in Base64
 var purviewPSScriptLocation = 'aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL0F6dXJlL2F6dXJlLXN5bmFwc2UtYW5hbHl0aWNzLWVuZDJlbmQvbWFpbi9EZXBsb3kvc2NyaXB0cy9QdXJ2aWV3UG9zdERlcGxveS5wczE='
